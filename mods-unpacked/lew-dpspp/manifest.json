@@ -13,7 +13,7 @@
 				"7.0.0"
 			],
 			"config_schema": {},
-			"description_rich": "Replaces the vanilla DPS display with accurate calculated values that account for all combat modifiers.\n\nFeatures:\n- Replaces weapon tooltip DPS with exact calculated values, accounting for infusors, mutations, mitochondria, and plasmids\n- Shows per-infusor DPS contributions inline in tooltips (e.g. \"Triosome **+43 DPS**\")\n- Displays charged DPS deltas\n- Shows before/after DPS comparison when combining or upgrading organelles\n- Displays total base and charged DPS in the editor stats area\n- Previews DPS when hovering a weapon over a slot, showing what infusors would connect\n\nFully accounts for:\n- Connected infusors\n- Mitochondria\n- Mutations\n- Plasmids from meta-progression\n- Enhanced slots\n- Cell evolutions",
+			"description_rich": "A Pathogenic mod that provides realtime DPS, and replaces vanilla DPS numbers with accurately calculated values, accounting for infusors, mitochondria, mutations, and plasmids.\n\nFeatures:\n- Accurate tooltip DPS: replaces vanilla weapon DPS in tooltips with exact values that account for all combat modifiers\n- Per-infusor contributions: shows each infusor's DPS impact inline (e.g. \"Triosome (+43 DPS)\")\n- Charged DPS: displays overcharged DPS deltas\n- Before/after preview: shows DPS comparison when combining or upgrading organelles\n- Editor stats: total base and charged DPS in the editor's vitals area\n- Slot preview: previews DPS with projected infusor connections when hovering a weapon over a slot\n- Realtime combat DPS: rolling DPS meter during combat next to the cores counter\n\nBased on the original Advanced DPS Calculator by Cube.",
 			"image": "icon.png",
 			"incompatibilities": [],
 			"load_before": [],
