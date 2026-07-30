@@ -19,6 +19,10 @@ A Pathogenic mod that provides realtime DPS, and replaces vanilla DPS numbers wi
 - **Realtime combat DPS** — rolling DPS meter during combat, displayed next to the cores counter
 
 
+## Installation
+
+Install via the Steam Workshop: [DPS++](https://steamcommunity.com/sharedfiles/filedetails/?id=3774560347)
+
 ## Credits
 
 This mod was originally forked, although almost entirely rewriten, from [Advanced DPS Calculator](https://steamcommunity.com/sharedfiles/filedetails/?id=3767905196)
