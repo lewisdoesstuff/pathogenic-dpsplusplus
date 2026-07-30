@@ -1,0 +1,32 @@
+{
+	"dependencies": [],
+	"description": "Updates the vanilla DPS numbers to account for attack infusers, mitochondria, mutations, and more",
+	"extra": {
+		"godot": {
+			"authors": [
+				"lew"
+			],
+			"compatible_game_version": [
+				"0.0.1"
+			],
+			"compatible_mod_loader_version": [
+				"7.0.0"
+			],
+			"config_schema": {},
+			"description_rich": "Replaces the vanilla DPS display with accurate calculated values that account for all combat modifiers.\n\nFeatures:\n- Replaces weapon tooltip DPS with exact calculated values, accounting for infusors, mutations, mitochondria, and plasmids\n- Shows per-infusor DPS contributions inline in tooltips (e.g. \"Triosome **+43 DPS**\")\n- Displays charged DPS deltas\n- Shows before/after DPS comparison when combining or upgrading organelles\n- Displays total base and charged DPS in the editor stats area\n- Previews DPS when hovering a weapon over a slot, showing what infusors would connect\n\nFully accounts for:\n- Connected infusors\n- Mitochondria\n- Mutations\n- Plasmids from meta-progression\n- Enhanced slots\n- Cell evolutions",
+			"image": "icon.png",
+			"incompatibilities": [],
+			"load_before": [],
+			"optional_dependencies": [],
+			"tags": [
+				"UI",
+				"Stats",
+				"QoL"
+			]
+		}
+	},
+	"name": "dpspp",
+	"namespace": "lew",
+	"version_number": "1.0.0",
+	"website_url": ""
+}
