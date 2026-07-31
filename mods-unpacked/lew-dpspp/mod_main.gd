@@ -39,10 +39,14 @@ func _process(delta: float) -> void:
 	
 	if not is_instance_valid(G.editor):
 		_ui_injected = false
+		_stats_base_label = null
 		return
 	
-	if not _ui_injected:
+	if not _ui_injected or not is_instance_valid(_ui_root):
 		_inject_ui()
+	
+	if not _stats_base_label:
+		inject_stats_labels()
 		
 	if G.editor.active:
 		if is_instance_valid(_ui_root) and not _ui_root.visible:
@@ -57,12 +61,12 @@ func _process(delta: float) -> void:
 			_ui_root.hide()
 		_last_tooltip_item = null
 
+
 func _inject_ui() -> void:
 	if not is_instance_valid(G.editor):
 		return
 
 	_ui_injected = true
-	ModLoaderLog.info("DPS++ injecting editor UI...", LOG_NAME)
 
 	_ui_root = Control.new()
 	_ui_root.name = "DpsViewerRoot"
@@ -71,38 +75,48 @@ func _inject_ui() -> void:
 
 	G.editor.add_child(_ui_root)
 	
+	# Stats labels are injected separately with retry logic
+
+func inject_stats_labels() -> void:
+	if not is_instance_valid(G.editor):
+		return
+	if not is_instance_valid(_ui_root):
+		return
+	
 	var vitals = _find_descendant(G.editor, "VitalsGraph")
-	if vitals:
-		var label_settings = null
-		var label_modulate = Color(0, 0, 0, 0.45)
+	if not vitals:
+		return
+	
+	var label_settings = null
+	var label_modulate = Color(0, 0, 0, 0.45)
+	
+	var temp_label = _find_descendant(vitals, "TemperatureLabel")
+	if temp_label:
+		label_settings = temp_label.label_settings
+		label_modulate = temp_label.modulate
+	
+	var stats_wrapper = VBoxContainer.new()
+	stats_wrapper.name = "DpsStatsWrapper"
+	stats_wrapper.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	stats_wrapper.add_theme_constant_override("separation", 0)
+	stats_wrapper.position = Vector2(40, 75)
+	_ui_root.add_child(stats_wrapper)
 		
-		var temp_label = _find_descendant(vitals, "TemperatureLabel")
-		if temp_label:
-			label_settings = temp_label.label_settings
-			label_modulate = temp_label.modulate
-		
-		var stats_wrapper = VBoxContainer.new()
-		stats_wrapper.name = "DpsStatsWrapper"
-		stats_wrapper.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		stats_wrapper.add_theme_constant_override("separation", 0)
-		stats_wrapper.position = Vector2(40, 75)
-		_ui_root.add_child(stats_wrapper)
-			
-		_stats_base_label = Label.new()
-		_stats_base_label.name = "DpsBaseLabel"
-		_stats_base_label.modulate = label_modulate
-		_stats_base_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-		if label_settings:
-			_stats_base_label.label_settings = label_settings
-		stats_wrapper.add_child(_stats_base_label)
-		
-		_stats_charged_label = Label.new()
-		_stats_charged_label.name = "DpsChargedLabel"
-		_stats_charged_label.modulate = label_modulate
-		_stats_charged_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-		if label_settings:
-			_stats_charged_label.label_settings = label_settings
-		stats_wrapper.add_child(_stats_charged_label)
+	_stats_base_label = Label.new()
+	_stats_base_label.name = "DpsBaseLabel"
+	_stats_base_label.modulate = label_modulate
+	_stats_base_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	if label_settings:
+		_stats_base_label.label_settings = label_settings
+	stats_wrapper.add_child(_stats_base_label)
+	
+	_stats_charged_label = Label.new()
+	_stats_charged_label.name = "DpsChargedLabel"
+	_stats_charged_label.modulate = label_modulate
+	_stats_charged_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	if label_settings:
+		_stats_charged_label.label_settings = label_settings
+	stats_wrapper.add_child(_stats_charged_label)
 
 func _update_stats_labels() -> void:
 	if not _stats_base_label:

@@ -23,6 +23,8 @@ func inject_label() -> void:
 		return
 	if not is_instance_valid(G.ui):
 		return
+	if not G.ui.is_inside_tree():
+		return
 	var money_label = get_parent().find_descendant(G.ui, "MoneyLabel")
 	if not money_label or not money_label.get_parent():
 		return
@@ -43,6 +45,9 @@ func inject_label() -> void:
 
 func update(delta: float) -> void:
 	if not label:
+		return
+	if not is_instance_valid(label):
+		label = null
 		return
 	if not SHOW_DPS:
 		label.text = ""

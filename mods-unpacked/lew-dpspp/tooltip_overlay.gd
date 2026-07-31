@@ -13,6 +13,9 @@ func update() -> void:
 		_last_item = null
 		return
 	
+	if not is_instance_valid(G.editor):
+		return
+	
 	var tooltips_to_check := ["%HoverTooltip", "%BodypartTooltip", "%GeneTooltip"]
 	var active_tooltip = null
 	var active_item = null
