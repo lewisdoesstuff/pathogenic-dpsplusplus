@@ -19,8 +19,11 @@ func _on_enemy_hit(_enemy, damage: float, _attack) -> void:
 	_sample_damage += damage
 
 func inject_label() -> void:
-	if _injected:
+	if _injected and is_instance_valid(label):
 		return
+	_injected = false
+	label = null
+	
 	if not is_instance_valid(G.ui):
 		return
 	if not G.ui.is_inside_tree():
@@ -44,10 +47,9 @@ func inject_label() -> void:
 	_injected = true
 
 func update(delta: float) -> void:
-	if not label:
-		return
-	if not is_instance_valid(label):
+	if not label or not is_instance_valid(label):
 		label = null
+		_injected = false
 		return
 	if not SHOW_DPS:
 		label.text = ""
